@@ -1,0 +1,38 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+train_data:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/train.csv
+
+test_data:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/test.csv
+
+preprocessed_train_data:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pickle.PickleDataSet
+    filepath: data/02_intermediate/preprocessed_train_data.pkl
+
+preprocessed_test_data:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pickle.PickleDataSet
+    filepath: data/02_intermediate/preprocessed_test_data.pkl
+
+classifier:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pickle.PickleDataSet
+    filepath: data/06_models/classifier.pkl
+    versioned: true
+
+y_pred:
+  type: pandas.CSVDataSet
+  filepath: data/07_model_output/y_pred.csv
+  versioned: true
+  save_args:
+    index: False
+    header: False

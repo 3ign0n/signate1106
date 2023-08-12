@@ -1,0 +1,10 @@
+# This is a boilerplate parameters config generated for pipeline 'data_science'
+# using Kedro 0.18.12.
+#
+# Documentation for this file format can be found in "Parameters"
+# Link: https://docs.kedro.org/en/0.18.12/kedro_project_setup/configuration.html#parameters
+model_opts:
+  batch_size: 64
+  n_folds: 1
+  n_epochs: 20
+  requires_grad: false
