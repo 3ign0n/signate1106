@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "signate1106"
+version = "0.1.0"
+description = ""
+authors = ["AOYAMA hiroyuki <3ign0n@gmail.com>"]
+readme = "README.md"
+
+[tool.kedro]
+package_name = "signate1106"
+project_name = "signate1106"
+kedro_init_version = "0.18.11"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = """
+--cov-report term-missing \
+--cov src/signate1106 -ra"""
+
+[tool.coverage.report]
+fail_under = 0
+show_missing = true
+exclude_lines = ["pragma: no cover", "raise NotImplementedError"]

@@ -22,6 +22,14 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+# Google CollabでTPUを使うためのimport
+try:
+    import torch_xla
+    import torch_xla.core.xla_model as xm
+except ImportError:
+    pass
+
+
 """
 # カスタムデータセット
 class ImgDataset(Dataset):
@@ -117,7 +125,11 @@ def train_nn_model(train_df: pd.DataFrame, parameters: Dict) -> Any:
     for name, param in model_ft.named_parameters():
         print(f"Name: {name}, requires_grad: {param.requires_grad}")
 
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    if os.environ['COLAB_TPU_ADDR']:
+        device = xm.xla_device()
+    else:
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
     print(f"using device:{device}")
     model_ft.to(device)
 
